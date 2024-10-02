@@ -2,16 +2,16 @@ import processing.core.*;
 
 public class App extends PApplet {
     float triangleX1 = 400; // X-position for the first triangle
-    float triangleX2 = 525; // X-position for the second triangle
+    float triangleX2 = 550; // X-position for the second triangle
     float triangleX3 = 675; // X-position for the third triangle
     float triangleX4 = 800; // X-position for the fourth triangle
     float triangleX5 = 925; // X-position for the fifth triangle
     double moveSpeed = 1; // Speed of movement to the left
     float resetPosition = width; // Reset position to the right side of the screen
 
-    float circleY = 373; // Initial Y position of the circle
+    float circleY = 375; // Initial Y position of the circle
     float circleRadius = 20; // Radius of the circle
-    float jumpHeight = 50; // Height of the jump
+    float jumpHeight = 70; // Height of the jump
     boolean isJumping = false; // Track if the circle is jumping
     int lives = 3;
     boolean gameOver = false; // Track game over state
@@ -47,7 +47,7 @@ public class App extends PApplet {
     }
 
     public void draw() {
-        if(frameCountWhenHit < frameCount - 60){
+        if (frameCountWhenHit < frameCount - (60 * (moveSpeed))) {
             hittable = true;
         }
 
@@ -62,16 +62,16 @@ public class App extends PApplet {
         fill(240, 207, 60);
         if (isJumping) {
             circleY -= 5; // Move up
-            if (circleY < 373 - jumpHeight) { // Check if reached jump height
+            if (circleY < 375 - jumpHeight) { // Check if reached jump height
                 isJumping = false; // Start falling
             }
-             } else {
-            if (circleY < 373) { // If falling, reset to ground level
-            circleY += 5; // Move down
+        } else {
+            if (circleY < 375) { // If falling, reset to ground level
+                circleY += 5; // Move down
             }
         }
         stroke(235, 130, 49);
-        strokeWeight(7);
+        strokeWeight(5);
         ellipse(150, circleY, circleRadius * 2, circleRadius * 2); // Draw circle
         triangleX1 -= moveSpeed;
         triangleX2 -= moveSpeed;
@@ -90,7 +90,7 @@ public class App extends PApplet {
         if (triangleX5 < -10)
             triangleX5 = width;
         if (triangleX5 == width) {
-            moveSpeed = moveSpeed + (0.1);
+            moveSpeed = moveSpeed + (0.3);
         }
 
         fill(150); // Fill color for the triangle
@@ -108,28 +108,35 @@ public class App extends PApplet {
                     checkCollision(triangleX3) || checkCollision(triangleX4) ||
                     checkCollision(triangleX5)) {
                 collided = true;
+
             }
         }
 
         if (collided) {
+            fill(255, 0, 0);
+            textSize(32);
+            System.out.println("hit");
+            
             lives--;
+
             if (lives <= 0) {
                 gameOver = true;
             }
             collided = false;
-            circleY = 373;
+            circleY = 375;
             hittable = false;
             frameCountWhenHit = frameCount;
+            text("HIT!", 130, 320);
         }
         fill(255);
         textSize(16);
         text("Lives: " + lives, 390, 20);
         // Move each triangle to the left
-        triangleX1 -= moveSpeed;
-        triangleX2 -= moveSpeed;
-        triangleX3 -= moveSpeed;
-        triangleX4 -= moveSpeed;
-        triangleX5 -= moveSpeed;
+        //triangleX1 -= moveSpeed;
+        // triangleX2 -= moveSpeed;
+        // triangleX3 -= moveSpeed;
+        // triangleX4 -= moveSpeed;
+        // triangleX5 -= moveSpeed;
 
         if (triangleX1 < -10)
             triangleX1 = width;
