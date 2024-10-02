@@ -47,7 +47,7 @@ public class App extends PApplet {
     }
 
     public void draw() {
-        if(frameCountWhenHit > frameCount - 1000){
+        if(frameCountWhenHit < frameCount - 60){
             hittable = true;
         }
 
@@ -65,10 +65,10 @@ public class App extends PApplet {
             if (circleY < 373 - jumpHeight) { // Check if reached jump height
                 isJumping = false; // Start falling
             }
-            // } else {
-            // if (circleY < 373) { // If falling, reset to ground level
-            // circleY += 5; // Move down
-            // }
+             } else {
+            if (circleY < 373) { // If falling, reset to ground level
+            circleY += 5; // Move down
+            }
         }
         stroke(235, 130, 49);
         strokeWeight(7);
@@ -90,7 +90,7 @@ public class App extends PApplet {
         if (triangleX5 < -10)
             triangleX5 = width;
         if (triangleX5 == width) {
-            moveSpeed = moveSpeed + (0.3);
+            moveSpeed = moveSpeed + (0.1);
         }
 
         fill(150); // Fill color for the triangle
