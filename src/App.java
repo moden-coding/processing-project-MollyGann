@@ -1,17 +1,17 @@
 import processing.core.*;
 
 public class App extends PApplet {
-    float triangleX1 = 400; // X-position for the first triangle
-    float triangleX2 = 550; // X-position for the second triangle
-    float triangleX3 = 675; // X-position for the third triangle
-    float triangleX4 = 800; // X-position for the fourth triangle
-    float triangleX5 = 925; // X-position for the fifth triangle
-    double moveSpeed = 1; // Speed of movement to the left
+    float triangleX1 = 300; // X-position for the first triangle
+    float triangleX2 = 450; // X-position for the second triangle
+    float triangleX3 = 575; // X-position for the third triangle
+    float triangleX4 = 700; // X-position for the fourth triangle
+    float triangleX5 = 825; // X-position for the fifth triangle
+    double moveSpeed = 1.2; // Speed of movement to the left
     float resetPosition = width; // Reset position to the right side of the screen
 
     float circleY = 375; // Initial Y position of the circle
     float circleRadius = 20; // Radius of the circle
-    float jumpHeight = 70; // Height of the jump
+    float jumpHeight = 60; // Height of the jump
     boolean isJumping = false; // Track if the circle is jumping
     int lives = 3;
     boolean gameOver = false; // Track game over state
@@ -47,11 +47,18 @@ public class App extends PApplet {
     }
 
     public void draw() {
+        background(5, 16, 84);
         if (frameCountWhenHit < frameCount - (60 * (moveSpeed))) {
             hittable = true;
         }
 
-        background(5, 16, 84);
+        if (hittable == false && frameCountWhenHit < frameCount - 5 && lives != 0) {
+            fill(255, 0, 0);
+            textSize(32);
+            text("HIT!", 130, 320);
+
+        }
+
         if (gameOver) {
             fill(255, 0, 0);
             textSize(32);
@@ -61,13 +68,13 @@ public class App extends PApplet {
 
         fill(240, 207, 60);
         if (isJumping) {
-            circleY -= 5; // Move up
+            circleY -= 3 * moveSpeed / 2; // speed of moving up
             if (circleY < 375 - jumpHeight) { // Check if reached jump height
                 isJumping = false; // Start falling
             }
         } else {
             if (circleY < 375) { // If falling, reset to ground level
-                circleY += 5; // Move down
+                circleY += 3 * moveSpeed / 2; // Move down
             }
         }
         stroke(235, 130, 49);
@@ -89,9 +96,9 @@ public class App extends PApplet {
             triangleX4 = width;
         if (triangleX5 < -10)
             triangleX5 = width;
-        if (triangleX5 == width) {
+
+        if (triangleX5 == width)
             moveSpeed = moveSpeed + (0.3);
-        }
 
         fill(150); // Fill color for the triangle
         noStroke(); // No outline
@@ -113,10 +120,10 @@ public class App extends PApplet {
         }
 
         if (collided) {
-            fill(255, 0, 0);
-            textSize(32);
+            // fill(255, 0, 0);
+            // textSize(32);
             System.out.println("hit");
-            
+
             lives--;
 
             if (lives <= 0) {
@@ -126,32 +133,16 @@ public class App extends PApplet {
             circleY = 375;
             hittable = false;
             frameCountWhenHit = frameCount;
-            text("HIT!", 130, 320);
+            // text("HIT!", 130, 320);
         }
         fill(255);
         textSize(16);
         text("Lives: " + lives, 390, 20);
-        // Move each triangle to the left
-        //triangleX1 -= moveSpeed;
-        // triangleX2 -= moveSpeed;
-        // triangleX3 -= moveSpeed;
-        // triangleX4 -= moveSpeed;
-        // triangleX5 -= moveSpeed;
 
-        if (triangleX1 < -10)
-            triangleX1 = width;
-        if (triangleX2 < -10)
-            triangleX2 = width;
-        if (triangleX3 < -10)
-            triangleX3 = width;
-        if (triangleX4 < -10)
-            triangleX4 = width;
-        if (triangleX5 < -10)
-            triangleX5 = width;
     }
 
     public void keyPressed() {
-        if (key == ' ') { // If space bar is pressed
+        if (key == ' ' && circleY >= 375) { // If space bar is pressed
             if (!isJumping) { // Jump only if not already jumping
                 isJumping = true; // Start jumping
             }
