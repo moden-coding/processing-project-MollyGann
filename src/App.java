@@ -1,22 +1,22 @@
 import processing.core.*;
 
 public class App extends PApplet {
-    float triangleX1 = 300; // X-position for the first triangle
-    float triangleX2 = 450; // X-position for the second triangle
-    float triangleX3 = 575; // X-position for the third triangle
-    float triangleX4 = 700; // X-position for the fourth triangle
-    float triangleX5 = 825; // X-position for the fifth triangle
+    float triangleX1 = 300;
+    float triangleX2 = 450;
+    float triangleX3 = 575;
+    float triangleX4 = 700;
+    float triangleX5 = 825;
     double moveSpeed = 1.2; // Speed of movement to the left
     float resetPosition = width; // Reset position to the right side of the screen
 
     float circleY = 375; // Initial Y position of the circle
-    float circleRadius = 20; // Radius of the circle
-    float jumpHeight = 60; // Height of the jump
-    boolean isJumping = false; // Track if the circle is jumping
+    float circleRadius = 20;
+    float jumpHeight = 60;
+    boolean isJumping = false;
     int lives = 3;
-    boolean gameOver = false; // Track game over state
+    boolean gameOver = false;
     boolean hittable = true;
-
+    int score = 0;
     int frameCountWhenHit = 0;
 
     boolean checkCollision(float triangleX) {
@@ -38,7 +38,7 @@ public class App extends PApplet {
     }
 
     public void settings() {
-        size(600, 400);
+        size(600, 400); // Size width, Size height
     }
 
     public void setup() {
@@ -60,21 +60,36 @@ public class App extends PApplet {
         }
 
         if (gameOver) {
-            fill(255, 0, 0);
-            textSize(32);
-            text("Game Over!", width / 2 - 80, height / 2);
-            return; // Stop the draw loop
+            fill(235, 130, 49);
+            textSize(50);
+            textAlign(CENTER, CENTER );
+            text("Game Over!", width / 2, height / 2 - 50);
+
+            strokeWeight(6);
+            stroke(250, 196, 35);
+            fill(150);
+            rect(200, 250, 100, 50);// size width, size height, X, Y
+            fill(100);
+            text("Play again", 320, 270);
+
+            fill(255);
+            textSize(30);
+            textAlign(RIGHT, TOP);
+            text("Final Score: " + score, 385, 40);
+
+            return;
+
         }
 
         fill(240, 207, 60);
         if (isJumping) {
-            circleY -= 3 * moveSpeed / 2; // speed of moving up
+            circleY -= 1.5 * moveSpeed; // speed of moving up
             if (circleY < 375 - jumpHeight) { // Check if reached jump height
                 isJumping = false; // Start falling
             }
         } else {
             if (circleY < 375) { // If falling, reset to ground level
-                circleY += 3 * moveSpeed / 2; // Move down
+                circleY += 1.5 * moveSpeed; // Move down
             }
         }
         stroke(235, 130, 49);
@@ -86,17 +101,32 @@ public class App extends PApplet {
         triangleX4 -= moveSpeed;
         triangleX5 -= moveSpeed;
 
-        if (triangleX1 < -10)
+        if (triangleX1 < -10){
             triangleX1 = width;
-        if (triangleX2 < -10)
+            score++;
+            
+        }
+           
+        if (triangleX2 < -10){
             triangleX2 = width;
-        if (triangleX3 < -10)
-            triangleX3 = width;
-        if (triangleX4 < -10)
-            triangleX4 = width;
-        if (triangleX5 < -10)
-            triangleX5 = width;
+            score++;
+        }
+            
 
+        if (triangleX3 < -10){
+            triangleX3 = width;
+            score++;
+        }
+
+        if (triangleX4 < -10){
+            triangleX4 = width;
+            score++;
+        }
+
+        if (triangleX5 < -10){
+            triangleX5 = width;
+                score++;
+            }
         if (triangleX5 == width)
             moveSpeed = moveSpeed + (0.3);
 
@@ -136,8 +166,11 @@ public class App extends PApplet {
             // text("HIT!", 130, 320);
         }
         fill(255);
-        textSize(16);
-        text("Lives: " + lives, 390, 20);
+        textSize(40);
+        text("Lives: " + lives, 390, 30);
+        fill(255);
+        textSize(40);
+        text("Score: " + score , 390, 60);
 
     }
 
@@ -149,4 +182,15 @@ public class App extends PApplet {
 
         }
     }
+
+    public void playAgain() {
+        if (mousePressed && mouseX >= 250 && mouseX <= 450 && mouseY >= 250 && mouseY <= 350) {
+            reset();
+        }
+    }
+
+    public void reset() {
+
+    }
+
 }
