@@ -63,19 +63,19 @@ public class App extends PApplet {
             fill(235, 130, 49);
             textSize(50);
             textAlign(CENTER, CENTER );
-            text("Game Over!", width / 2, height / 2 - 50);
+            text("Game Over!\n Final Score: " + score, width / 2, height / 2 - 50);
 
             strokeWeight(6);
             stroke(250, 196, 35);
             fill(150);
-            rect(200, 250, 100, 50);// size width, size height, X, Y
+            rect(175, 240, 250, 100);//  X, Y size width, size height,
             fill(100);
             text("Play again", 320, 270);
 
-            fill(255);
-            textSize(30);
-            textAlign(RIGHT, TOP);
-            text("Final Score: " + score, 385, 40);
+            // fill(255);
+            // textSize(30);
+            // textAlign(RIGHT, TOP);
+            // text("Final Score: " + score, 385, 40);
 
             return;
 
