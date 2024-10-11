@@ -57,6 +57,7 @@ public class App extends PApplet {
             textSize(32);
             text("HIT!", 130, 320);
 
+
         }
 
         if (gameOver) {
@@ -70,7 +71,7 @@ public class App extends PApplet {
             fill(150);
             rect(175, 240, 250, 100);//  X, Y size width, size height,
             fill(100);
-            text("Play again", 320, 270);
+            text("Play again", 300, 275);
 
             // fill(255);
             // textSize(30);
@@ -150,8 +151,7 @@ public class App extends PApplet {
         }
 
         if (collided) {
-            // fill(255, 0, 0);
-            // textSize(32);
+            
             System.out.println("hit");
 
             lives--;
@@ -167,10 +167,10 @@ public class App extends PApplet {
         }
         fill(255);
         textSize(40);
-        text("Lives: " + lives, 390, 30);
+        text("Lives: " + lives, 450, 30);
         fill(255);
         textSize(40);
-        text("Score: " + score , 390, 60);
+        text("Score: " + score , 450, 60);
 
     }
 
@@ -182,15 +182,30 @@ public class App extends PApplet {
 
         }
     }
-
-    public void playAgain() {
-        if (mousePressed && mouseX >= 250 && mouseX <= 450 && mouseY >= 250 && mouseY <= 350) {
+     public void mousePressed() {
+            if(mouseX>=175 && mouseX <=425 && mouseY>= 240 && mouseY<= 340);
             reset();
-        }
     }
+
+    
 
     public void reset() {
+         triangleX1 = 300;
+     triangleX2 = 450;
+     triangleX3 = 575;
+     triangleX4 = 700;
+     triangleX5 = 825;
+     moveSpeed = 1.2; 
+      isJumping = false;
+      lives = 3;
+      gameOver = false;
+      hittable = true;
+      score = 0;
+      frameCountWhenHit = 0;
+      textAlign(LEFT, BASELINE );
 
     }
+
+
 
 }
