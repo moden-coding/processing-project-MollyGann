@@ -8,7 +8,7 @@ public class App extends PApplet {
     float triangleX5 = 825;
     double moveSpeed = 1.2; // Speed of movement to the left
     float resetPosition = width; // Reset position to the right side of the screen
-
+ 
     float circleY = 375; // Initial Y position of the circle
     float circleRadius = 20;
     float jumpHeight = 60;
@@ -18,6 +18,8 @@ public class App extends PApplet {
     boolean hittable = true;
     int score = 0;
     int frameCountWhenHit = 0;
+
+    int gamescreen = 0;
 
     boolean checkCollision(float triangleX) {
         // Get the triangle vertices
@@ -47,6 +49,11 @@ public class App extends PApplet {
     }
 
     public void draw() {
+       if (gamescreen == 0){
+       intro();
+
+       }
+       else if( gamescreen == 1){
         background(5, 16, 84);
         if (frameCountWhenHit < frameCount - (60 * (moveSpeed))) {
             hittable = true;
@@ -57,29 +64,13 @@ public class App extends PApplet {
             textSize(32);
             text("HIT!", 130, 320);
 
-
         }
 
         if (gameOver) {
-            fill(235, 130, 49);
-            textSize(50);
-            textAlign(CENTER, CENTER );
-            text("Game Over!\n Final Score: " + score, width / 2, height / 2 - 50);
+            gameOver();
+        return;
 
-            strokeWeight(6);
-            stroke(250, 196, 35);
-            fill(150);
-            rect(175, 240, 250, 100);//  X, Y size width, size height,
-            fill(100);
-            text("Play again", 300, 275);
-
-            // fill(255);
-            // textSize(30);
-            // textAlign(RIGHT, TOP);
-            // text("Final Score: " + score, 385, 40);
-
-            return;
-
+            
         }
 
         fill(240, 207, 60);
@@ -171,7 +162,7 @@ public class App extends PApplet {
         fill(255);
         textSize(40);
         text("Score: " + score , 450, 60);
-
+    }
     }
 
     public void keyPressed() {
@@ -181,13 +172,56 @@ public class App extends PApplet {
             }
 
         }
+        if(key == ' ' && gamescreen ==0 ){
+            gamescreen = 1;
+        }
+        
     }
      public void mousePressed() {
-            if(mouseX>=175 && mouseX <=425 && mouseY>= 240 && mouseY<= 340);
+            if(gameOver == true && mouseX>=175 && mouseX <=425 && mouseY>= 240 && mouseY<= 340){  
             reset();
+        }
+        if(gamescreen ==0 ){
+                gamescreen = 1;}
     }
 
-    
+    public void gameOver(){
+        fill(235, 130, 49);
+            textSize(50);
+            textAlign(CENTER, CENTER );
+            text("Game Over!\n Final Score: " + score, width / 2, height / 2 - 50);
+
+            strokeWeight(6);
+            stroke(250, 196, 35);
+            fill(150);
+            rect(175, 240, 250, 100);//  X, Y size width, size height,
+            fill(100);
+            text("Play again", 300, 275);
+
+    }
+
+    public void intro(){
+        background(255);
+        fill(0);
+        // title of the game in the middle
+        textSize(30);
+        textAlign(CENTER, CENTER);
+        text("This is the dinosaur game!", width / 2, 135);
+
+       
+
+        // instructions for the game
+        text("Press space to jump in the game", width / 2, 165);
+        text("Try and avoid the obstacles", width / 2, 200);
+        text("You get 3 lives", width / 2,
+                235);
+       
+
+        // How to Start
+        text("Press anywhere to start", width / 2, 280);
+        textAlign(LEFT, BASELINE ); //puts text align back to default
+
+    }
 
     public void reset() {
          triangleX1 = 300;
@@ -202,7 +236,6 @@ public class App extends PApplet {
       hittable = true;
       score = 0;
       frameCountWhenHit = 0;
-      textAlign(LEFT, BASELINE );
 
     }
 
