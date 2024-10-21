@@ -54,6 +54,8 @@ public class App extends PApplet {
 
        }
        else if( gamescreen == 1){
+        textAlign(LEFT, BASELINE ); //puts text align back to default
+
         background(5, 16, 84);
         if (frameCountWhenHit < frameCount - (60 * (moveSpeed))) {
             hittable = true;
@@ -220,7 +222,6 @@ public class App extends PApplet {
 
         // How to Start
         text("Press space to start", width / 2, 280);
-        textAlign(LEFT, BASELINE ); //puts text align back to default
 
     }
 
