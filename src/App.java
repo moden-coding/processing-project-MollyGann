@@ -93,6 +93,7 @@ public class App extends PApplet {
         triangleX4 -= moveSpeed;
         triangleX5 -= moveSpeed;
 
+
         if (triangleX1 < -10){
             triangleX1 = width;
             score++;
@@ -166,7 +167,7 @@ public class App extends PApplet {
     }
 
     public void keyPressed() {
-        if (key == ' ' && circleY >= 375) { // If space bar is pressed
+        if (key == ' ' && circleY >= 375 && gamescreen == 1) { // If space bar is pressed
             if (!isJumping) { // Jump only if not already jumping
                 isJumping = true; // Start jumping
             }
@@ -178,11 +179,11 @@ public class App extends PApplet {
         
     }
      public void mousePressed() {
-            if(gameOver == true && mouseX>=175 && mouseX <=425 && mouseY>= 240 && mouseY<= 340){  
+            if(gameOver == true && mouseX>=175 && mouseX <=425 && mouseY>= 240 && mouseY<= 340)//coordinates of the play box
+            {  
             reset();
         }
-        if(gamescreen ==0 ){
-                gamescreen = 1;}
+     
     }
 
     public void gameOver(){
@@ -218,7 +219,7 @@ public class App extends PApplet {
        
 
         // How to Start
-        text("Press anywhere to start", width / 2, 280);
+        text("Press space to start", width / 2, 280);
         textAlign(LEFT, BASELINE ); //puts text align back to default
 
     }
