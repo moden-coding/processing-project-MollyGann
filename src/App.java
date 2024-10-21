@@ -4,7 +4,7 @@ public class App extends PApplet {
     float triangleX1 = 300;
     float triangleX2 = 450;
     float triangleX3 = 575;
-    float triangleX4 = 700;
+    float triangleX4 = 700; 
     float triangleX5 = 825;
     double moveSpeed = 1.2; // Speed of movement to the left
     float resetPosition = width; // Reset position to the right side of the screen
@@ -208,7 +208,7 @@ public class App extends PApplet {
         textAlign(CENTER, CENTER);
         text("This is the dinosaur game!", width / 2, 135);
 
-       
+        
 
         // instructions for the game
         text("Press space to jump in the game", width / 2, 165);
