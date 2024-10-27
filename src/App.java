@@ -61,7 +61,7 @@ public class App extends PApplet {
             hittable = true;
         }
 
-        if (hittable == false && frameCountWhenHit < frameCount - 5 && lives != 0) {
+        if (hittable == false && frameCountWhenHit < frameCount - 1 && lives != 0) {
             fill(255, 0, 0);
             textSize(32);
             text("HIT!", 130, 320);
